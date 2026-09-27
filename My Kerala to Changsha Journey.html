@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Kerala to Changsha Journey</title>
+<style>
+:root{
+  --green:#1a8a5f; --green-d:#0f5c3f; --blue:#12506b; --blue-l:#e8f3f6;
+  --gold:#e8ac3e; --red:#d9614f; --bg:#fbfaf6; --card:#ffffff; --ink:#1f2a2e; --sub:#6b7a80; --line:#e7e2d6;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#12181a;--card:#1a2224;--ink:#eef2f0;--sub:#9db0a8;--line:#2a3436;--blue-l:#182a30;}
+}
+:root[data-theme="dark"]{--bg:#12181a;--card:#1a2224;--ink:#eef2f0;--sub:#9db0a8;--line:#2a3436;--blue-l:#182a30;}
+*{box-sizing:border-box;}
+html,body{margin:0;height:100%;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);}
+#app{max-width:520px;margin:0 auto;padding:16px 16px 90px;min-height:100%;}
+h1,h2,h3{margin:0 0 8px;}
+h2{font-size:1.15rem;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;}
+.hero{background:linear-gradient(135deg,var(--green) 0%,var(--blue) 100%);color:#fff;border-radius:18px;padding:20px;margin-bottom:16px;}
+.hero small{opacity:.85;}
+.progress-wrap{background:rgba(255,255,255,.25);border-radius:20px;height:10px;overflow:hidden;margin:10px 0;}
+.progress-wrap.dark-bar{background:var(--line);}
+.progress-bar{height:100%;background:var(--gold);border-radius:20px;transition:width .3s;}
+.progress-bar.solid{background:var(--green);}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 12px;border-radius:999px;font-size:.82rem;cursor:pointer;}
+.pill.light{background:var(--blue-l);color:var(--blue);border:1px solid var(--line);}
+.section-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--sub);margin:18px 0 8px;}
+.task{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);}
+.task:last-child{border-bottom:none;}
+.task input[type=checkbox]{width:22px;height:22px;accent-color:var(--green);margin-top:2px;flex-shrink:0;}
+.task .t-body{flex:1;}
+.task .t-title{font-size:.95rem;}
+.task.done .t-title{text-decoration:line-through;color:var(--sub);}
+.task .t-meta{font-size:.75rem;color:var(--sub);margin-top:3px;}
+.task .t-meta input{width:100%;font-size:.78rem;border:1px solid var(--line);border-radius:8px;padding:4px 6px;margin-top:4px;background:var(--bg);color:var(--ink);}
+.group-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:12px;background:var(--blue-l);border-radius:12px;margin-bottom:6px;}
+.group-head b{font-size:.92rem;}
+.group-head span{font-size:.78rem;color:var(--sub);}
+.group-body{display:none;padding:0 4px;}
+.group-body.open{display:block;}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding:6px env(safe-area-inset-right,0px) calc(6px + env(safe-area-inset-bottom,0px)) env(safe-area-inset-left,0px);max-width:520px;margin:0 auto;z-index:10;}
+nav button{flex:1;background:none;border:none;color:var(--sub);font-size:.65rem;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;}
+nav button.active{color:var(--green-d);font-weight:600;}
+nav button .ic{font-size:1.25rem;}
+.view{display:none;}
+.view.active{display:block;}
+.doc-row,.contact-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);gap:8px;}
+.doc-row:last-child,.contact-row:last-child{border-bottom:none;}
+.badge{font-size:.68rem;padding:3px 8px;border-radius:999px;background:var(--blue-l);color:var(--blue);}
+.badge.warn{background:#fbe4de;color:var(--red);}
+input,textarea{font-family:inherit;}
+.field{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:.9rem;margin-top:4px;}
+label{font-size:.8rem;color:var(--sub);display:block;margin-top:10px;}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;z-index:50;}
+.modal{background:var(--card);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:520px;margin:0 auto;}
+.big-btn{width:100%;background:var(--green);color:#fff;border:none;padding:13px;border-radius:12px;font-size:.95rem;font-weight:600;margin-top:16px;cursor:pointer;}
+.warn-box{background:#fbe4de;color:#7a2e22;border-radius:12px;padding:10px 12px;font-size:.8rem;margin-top:10px;}
+.timeline{display:flex;overflow-x:auto;gap:10px;padding-bottom:6px;}
+.tl-item{flex:0 0 auto;text-align:center;font-size:.68rem;color:var(--sub);width:70px;}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--line);margin:0 auto 4px;}
+.tl-dot.done{background:var(--green);}
+.tl-dot.next{background:var(--gold);}
+.phrase{padding:8px 0;border-bottom:1px solid var(--line);}
+.phrase b{display:block;}
+.phrase span{color:var(--sub);font-size:.82rem;}
+.next-task{display:flex;justify-content:space-between;align-items:center;background:var(--blue-l);border-radius:12px;padding:12px;margin-top:10px;}
+.ic-emerg{background:var(--red);color:#fff;text-align:center;padding:14px;border-radius:14px;font-weight:700;margin-bottom:12px;}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<nav id="tabbar">
+  <button data-v="home"><span class="ic">🏠</span>Home</button>
+  <button data-v="checklist"><span class="ic">✅</span>Checklist</button>
+  <button data-v="docs"><span class="ic">📁</span>Docs</button>
+  <button data-v="travel"><span class="ic">✈️</span>Travel</button>
+  <button data-v="guide"><span class="ic">🗺️</span>Guide</button>
+  <button data-v="tracker"><span class="ic">📔</span>Tracker</button>
+  <button data-v="sos"><span class="ic">🆘</span>SOS</button>
+</nav>
+
+<script>
+// ---------- storage helpers ----------
+const K = "kc_journey_v1";
+function load(){ try{return JSON.parse(localStorage.getItem(K))||{}}catch(e){return {}} }
+function save(d){ try{localStorage.setItem(K, JSON.stringify(d))}catch(e){} }
+let state = Object.assign({
+  profile:null,
+  tasks:{}, // id -> {done,note,deadline}
+  docs:{}, // name -> {expiry,note}
+  journal:[],
+  theme:'auto'
+}, load());
+function persist(){ save(state); }
+
+// ---------- data ----------
+const CHECKLIST = {
+"Before Applying":["Research the Chinese language program","Confirm program dates and fees","Prepare passport","Collect academic certificates","Obtain passport-size photographs","Prepare financial documents if needed","Submit application","Receive admission letter"],
+"Visa Preparation":["Check passport validity","Receive admission letter and JW form","Complete visa application form","Book Chinese visa appointment in India","Arrange medical test if required","Buy travel insurance","Submit visa application","Collect visa","Scan and securely save all documents"],
+"Before Leaving Kerala":["Book flight from Kerala to Changsha","Check baggage allowance","Reserve accommodation/dormitory","Inform family of travel plan","Exchange some INR to Chinese yuan","Activate international bank card","Buy or prepare an eSIM/SIM plan","Download WeChat, Alipay, Didi, Baidu Maps, Google Translate, and a VPN if legally appropriate","Pack clothes for Changsha weather","Pack medicines and prescriptions","Pack adapters, chargers, power bank, and important electronics","Print passport, visa, admission letter, flight ticket, insurance, and accommodation details","Save digital copies of every important document","Share itinerary with family","Complete final luggage check","Check in for flight"],
+"Travel Day: Kerala to China":["Carry passport and travel documents in hand luggage","Reach Kerala airport early","Complete check-in and immigration","Confirm transit airport details","Keep Chinese address and university contact available","Connect to airport Wi-Fi or activate roaming/eSIM","Send family a departure update","Board flight","Complete China arrival form/customs requirements","Send family an arrival update"],
+"Arrival in Changsha":["Withdraw or exchange emergency cash","Buy/activate local SIM card if needed","Use Didi, taxi, metro, or university pickup","Travel safely to campus/accommodation","Check into dormitory or housing","Contact the international office","Let family know you arrived safely","Rest, eat, and prepare documents for registration"],
+"First Week at University":["Complete university registration","Submit original documents","Pay required fees","Receive student ID card","Receive dormitory access/card","Register local address if required","Open a Chinese bank account if needed","Set up WeChat Pay and Alipay","Get local transport card","Find classroom, cafeteria, library, clinic, and international office","Meet classmates and join student groups","Confirm class timetable","Attend orientation"],
+"Study & Daily Life":["Track class schedule and homework","Daily Chinese vocabulary goal","Weekly study goal","Monthly budget tracker","Explore Changsha safely","Track accommodation payments","Record useful Chinese phrases","Store emergency contacts","Track visa and residence-permit expiry dates","Plan holidays and travel responsibly"]
+};
+const STAGES = ["Kerala","Departure","China Arrival","Changsha","Registration","Study Life","Completion"];
+const DOC_TYPES = ["Passport","Visa","Admission Letter","JW Form","Travel Insurance","Flight Itinerary","Medical Records","Accommodation Details","Academic Certificates","Emergency Contacts"];
+const PHRASES = [["Ni hao","nǐ hǎo","Hello"],["Xie xie","xiè xiè","Thank you"],["Duo shao qian","duō shǎo qián","How much?"],["Bang bang wo","bāng bāng wǒ","Help me"],["Wo bu dong","wǒ bù dǒng","I don't understand"],["Ce suo zai nar","cè suǒ zài nǎr","Where's the toilet?"],["Wo yao qu daxue","wǒ yào qù dàxué","I need to go to the university"]];
+const EMERGENCY = [["Campus Security","fill in"],["International Office","fill in"],["Police (China)","110"],["Ambulance","120"],["Fire","119"],["Indian Embassy/Consulate","fill in"],["Airline","fill in"],["Family Contact","fill in"],["Accommodation","fill in"]];
+
+let allIds = [];
+Object.entries(CHECKLIST).forEach(([g,items])=>items.forEach((t,i)=>allIds.push(g+"::"+i)));
+function taskState(id){ return state.tasks[id] || {done:false,note:"",deadline:""}; }
+function setTask(id,patch){ state.tasks[id]=Object.assign(taskState(id),patch); persist(); render(); }
+
+function progress(){
+  const done = allIds.filter(id=>taskState(id).done).length;
+  return {done, total: allIds.length, pct: Math.round(done/allIds.length*100)};
+}
+function nextTask(){
+  for(const [g,items] of Object.entries(CHECKLIST)){
+    for(let i=0;i<items.length;i++){
+      const id=g+"::"+i;
+      if(!taskState(id).done) return {group:g, text:items[i], id};
+    }
+  }
+  return null;
+}
+function daysUntil(dateStr){
+  if(!dateStr) return null;
+  const d = new Date(dateStr+"T00:00:00");
+  const now = new Date();
+  return Math.ceil((d-now)/86400000);
+}
+function currentStageIndex(){
+  const p = progress().pct;
+  if(!state.profile) return 0;
+  if(p===0) return 0;
+  if(p<15) return 1;
+  if(p<45) return 2;
+  if(p<60) return 3;
+  if(p<75) return 4;
+  if(p<100) return 5;
+  return 6;
+}
+
+// ---------- render ----------
+let activeView = "home";
+let openGroups = {};
+
+function el(html){ const d=document.createElement('div'); d.innerHTML=html; return d.firstElementChild; }
+
+function render(){
+  const app = document.getElementById('app');
+  if(!state.profile){ app.innerHTML = onboardHTML(); wireOnboard(); document.getElementById('tabbar').style.display='none'; return; }
+  document.getElementById('tabbar').style.display='flex';
+  document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active', b.dataset.v===activeView));
+  let html = "";
+  if(activeView==="home") html = homeHTML();
+  else if(activeView==="checklist") html = checklistHTML();
+  else if(activeView==="docs") html = docsHTML();
+  else if(activeView==="travel") html = travelHTML();
+  else if(activeView==="guide") html = guideHTML();
+  else if(activeView==="tracker") html = trackerHTML();
+  else if(activeView==="sos") html = sosHTML();
+  app.innerHTML = html;
+  wireCommon();
+}
+
+function onboardHTML(){
+  return `<div class="hero"><h1>Welcome 🌴✈️🇨🇳</h1><p>Let's set up your Kerala → Changsha journey planner.</p></div>
+  <div class="card">
+    <label>Your name</label><input class="field" id="ob-name">
+    <label>Kerala departure airport</label><input class="field" id="ob-airport" placeholder="e.g. Cochin (COK)">
+    <label>Planned departure date</label><input class="field" id="ob-dep" type="date">
+    <label>University registration date</label><input class="field" id="ob-reg" type="date">
+    <button class="big-btn" id="ob-save">Start my journey</button>
+  </div>`;
+}
+function wireOnboard(){
+  document.getElementById('ob-save').onclick = ()=>{
+    const name = document.getElementById('ob-name').value.trim() || "Traveler";
+    state.profile = {
+      name, airport: document.getElementById('ob-airport').value.trim(),
+      dep: document.getElementById('ob-dep').value, reg: document.getElementById('ob-reg').value
+    };
+    persist(); render();
+  };
+}
+
+function homeHTML(){
+  const p = progress(); const nt = nextTask(); const dep = daysUntil(state.profile.dep);
+  const stageIdx = currentStageIndex();
+  return `
+  <div class="hero">
+    <small>Welcome back,</small>
+    <h1>${esc(state.profile.name)} 👋</h1>
+    <div>Changsha journey progress</div>
+    <div class="progress-wrap"><div class="progress-bar" style="width:${p.pct}%"></div></div>
+    <div>${p.done} of ${p.total} tasks completed</div>
+    ${dep!==null ? `<div style="margin-top:6px;">🛫 ${dep>=0?dep+' days to departure':'Departure day has passed'}</div>`:''}
+    <div class="btn-row">
+      <button class="pill" data-goto="checklist">✅ Checklist</button>
+      <button class="pill" data-goto="docs">📁 Documents</button>
+      <button class="pill" data-goto="travel">✈️ Arrival</button>
+      <button class="pill" data-goto="guide">🗺️ Campus</button>
+      <button class="pill" data-goto="sos">🆘 Emergency</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="section-title">Journey Timeline</div>
+    <div class="timeline">${STAGES.map((s,i)=>`<div class="tl-item"><div class="tl-dot ${i<stageIdx?'done':i===stageIdx?'next':''}"></div>${s}</div>`).join('')}</div>
+  </div>
+  <div class="card">
+    <div class="section-title">Next up</div>
+    ${nt ? `<div class="next-task"><div><b>${esc(nt.text)}</b><div class="t-meta">${esc(nt.group)}</div></div><button class="pill light" data-donext="${nt.id}">Mark done</button></div>` : `<p>🎉 All tasks complete — you're ready!</p>`}
+    <p style="font-size:.85rem;color:var(--sub);margin-top:10px;">One step closer to Changsha. 🌟</p>
+  </div>`;
+}
+
+function groupProgress(g){
+  const items = CHECKLIST[g];
+  const done = items.filter((_,i)=>taskState(g+"::"+i).done).length;
+  return {done, total: items.length};
+}
+function checklistHTML(){
+  const p = progress();
+  return `<h2>Master Checklist</h2><div class="card" style="padding:12px 16px;"><div class="progress-wrap dark-bar"><div class="progress-bar solid" style="width:${p.pct}%"></div></div><div style="font-size:.85rem;color:var(--sub);margin-top:4px;">${p.done} of ${p.total} tasks completed</div></div>
+  ${Object.keys(CHECKLIST).map(g=>{
+    const gp = groupProgress(g); const open = openGroups[g];
+    return `<div class="card" style="padding:8px;">
+      <div class="group-head" data-toggle="${g}"><b>${esc(g)}</b><span>${gp.done}/${gp.total} ${open?'▲':'▼'}</span></div>
+      <div class="group-body ${open?'open':''}">
+        ${CHECKLIST[g].map((t,i)=>{
+          const id = g+"::"+i; const ts = taskState(id);
+          return `<div class="task ${ts.done?'done':''}">
+            <input type="checkbox" data-task="${id}" ${ts.done?'checked':''}>
+            <div class="t-body">
+              <div class="t-title">${esc(t)}</div>
+              <div class="t-meta">
+                <input class="field" style="margin-top:4px;" placeholder="Deadline" type="date" data-deadline="${id}" value="${ts.deadline||''}">
+                <input class="field" style="margin-top:4px;" placeholder="Add a note" data-note="${id}" value="${esc(ts.note||'')}">
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('')}`;
+}
+
+function docsHTML(){
+  return `<h2>Documents Vault</h2>
+  <div class="warn-box">🔒 This is metadata only (names, expiry dates, notes) stored privately on this device. Don't paste sensitive numbers (passport/ID numbers) into notes — keep physical/secure digital copies elsewhere.</div>
+  <div class="card">
+    ${DOC_TYPES.map(dt=>{
+      const d = state.docs[dt] || {expiry:'',note:''};
+      const dleft = daysUntil(d.expiry);
+      return `<div class="doc-row" style="flex-direction:column;align-items:stretch;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b style="font-size:.9rem;">${esc(dt)}</b>
+          ${dleft!==null ? `<span class="badge ${dleft<60?'warn':''}">${dleft>=0? dleft+'d left':'expired'}</span>`:''}
+        </div>
+        <input class="field" type="date" placeholder="Expiry date" data-doc-exp="${dt}" value="${d.expiry||''}">
+        <input class="field" placeholder="Note" data-doc-note="${dt}" value="${esc(d.note||'')}">
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function travelHTML(){
+  const dep = daysUntil(state.profile.dep);
+  const flightGroups = ["Before Leaving Kerala","Travel Day: Kerala to China","Arrival in Changsha"];
+  return `<h2>Flight & Arrival Planner</h2>
+  <div class="card">
+    <div style="font-size:.9rem;color:var(--sub);">Departure airport</div><b>${esc(state.profile.airport||'Not set')}</b>
+    <div style="margin-top:10px;font-size:.9rem;color:var(--sub);">Departure date</div><b>${state.profile.dep||'Not set'}</b>
+    ${dep!==null? `<div style="margin-top:8px;">🛫 ${dep>=0? dep+' days remaining':'Departure has passed'}</div>`:''}
+  </div>
+  ${flightGroups.map(g=>{
+    const gp = groupProgress(g); const open = openGroups[g];
+    return `<div class="card" style="padding:8px;">
+      <div class="group-head" data-toggle="${g}"><b>${esc(g)}</b><span>${gp.done}/${gp.total} ${open?'▲':'▼'}</span></div>
+      <div class="group-body ${open?'open':''}">
+        ${CHECKLIST[g].map((t,i)=>{
+          const id=g+"::"+i; const ts=taskState(id);
+          return `<div class="task ${ts.done?'done':''}"><input type="checkbox" data-task="${id}" ${ts.done?'checked':''}><div class="t-body"><div class="t-title">${esc(t)}</div></div></div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('')}
+  <div class="card">
+    <div class="section-title">Emergency quick access</div>
+    ${EMERGENCY.slice(0,4).map(([n,v])=>`<div class="contact-row"><span>${esc(n)}</span><span style="color:var(--sub);">${esc(v)}</span></div>`).join('')}
+    <p style="font-size:.8rem;color:var(--sub);">See the SOS tab for the full list.</p>
+  </div>`;
+}
+
+function guideHTML(){
+  return `<h2>Changsha Survival Guide</h2>
+  <div class="card"><div class="section-title">Campus essentials</div>
+    <p style="font-size:.9rem;">Dormitory · International Office · Cafeteria · Clinic · Classrooms · Library · ATM · Security</p>
+    <p style="font-size:.8rem;color:var(--sub);">Verify before travel: exact building names and locations.</p>
+  </div>
+  <div class="card"><div class="section-title">Daily-life essentials</div>
+    <p style="font-size:.9rem;">Local transport (metro/bus/Didi) · Groceries & food · Mobile payments (WeChat Pay, Alipay) · Hospitals · Weather · Safety & etiquette</p>
+  </div>
+  <div class="card"><div class="section-title">Essential Chinese phrases</div>
+    ${PHRASES.map(([cn,py,en])=>`<div class="phrase"><b>${esc(cn)} <span style="font-weight:400;color:var(--sub);">(${esc(py)})</span></b><span>${esc(en)} · 🔊 audio placeholder</span></div>`).join('')}
+  </div>
+  <div class="card"><div class="section-title">Saved places & notes</div>
+    <textarea class="field" rows="3" id="guide-notes" placeholder="Save favorite restaurants, routes, tips...">${esc(state.guideNotes||'')}</textarea>
+  </div>`;
+}
+
+function trackerHTML(){
+  const p = progress();
+  return `<h2>Study & Personal Tracker</h2>
+  <div class="card"><div class="section-title">Daily habits</div>
+    ${["Attend class","Revise vocabulary","Call family","Exercise","Sleep well","Track spending"].map(h=>`<div class="task"><input type="checkbox" data-habit="${h}" ${state[('habit_'+h)]?'checked':''}><div class="t-body"><div class="t-title">${esc(h)}</div></div></div>`).join('')}
+  </div>
+  <div class="card"><div class="section-title">Milestones</div>
+    <p style="font-size:.85rem;">${p.pct>=25?'🏅 Prep Champion (25%)':'🔒 Prep Champion at 25%'}<br>
+    ${p.pct>=60?'🏅 Arrival Survivor (60%)':'🔒 Arrival Survivor at 60%'}<br>
+    ${p.pct===100?'🏅 Changsha Graduate (100%)':'🔒 Changsha Graduate at 100%'}</p>
+  </div>
+  <div class="card"><div class="section-title">Journal</div>
+    <textarea class="field" rows="3" id="journal-entry" placeholder="Write about your journey today..."></textarea>
+    <button class="big-btn" id="journal-add">Add entry</button>
+    ${(state.journal||[]).slice().reverse().map(j=>`<div class="phrase"><span style="color:var(--sub);">${j.date}</span><br>${esc(j.text)}</div>`).join('')}
+  </div>`;
+}
+
+function sosHTML(){
+  return `<div class="ic-emerg">🆘 Emergency Quick Access</div>
+  <div class="card">
+    ${EMERGENCY.map(([n,v],i)=>`<div class="contact-row"><span>${esc(n)}</span><input class="field" style="max-width:140px;" data-emerg="${i}" value="${esc((state.emergOverrides&&state.emergOverrides[i])||v)}"></div>`).join('')}
+  </div>
+  <div class="card"><div class="section-title">What to do if...</div>
+    <p style="font-size:.87rem;"><b>Lost passport</b> — Contact campus security & the Indian Embassy/Consulate immediately; file a police report; keep a photo copy handy.<br><br>
+    <b>Lost phone</b> — Notify university office and family via another device; freeze payment apps (WeChat Pay/Alipay).<br><br>
+    <b>Missed flight</b> — Contact the airline immediately; inform your university of a delayed arrival.<br><br>
+    <b>Sickness</b> — Go to campus clinic first, or a hospital for anything serious; carry insurance details.<br><br>
+    <b>Payment issue</b> — Keep a backup card and some cash; contact your bank's international hotline.<br><br>
+    <b>Getting lost</b> — Use Baidu Maps/Didi; show your address card to locals or police (110).</p>
+  </div>`;
+}
+
+function esc(s){ return (s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+function wireCommon(){
+  document.querySelectorAll('#tabbar button').forEach(b=>b.onclick=()=>{ activeView=b.dataset.v; render(); });
+  document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>{ activeView=b.dataset.goto; render(); });
+  document.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=()=>{ const g=b.dataset.toggle; openGroups[g]=!openGroups[g]; render(); });
+  document.querySelectorAll('[data-task]').forEach(cb=>cb.onchange=()=>setTask(cb.dataset.task,{done:cb.checked}));
+  document.querySelectorAll('[data-donext]').forEach(b=>b.onclick=()=>setTask(b.dataset.donext,{done:true}));
+  document.querySelectorAll('[data-note]').forEach(inp=>inp.onchange=()=>setTask(inp.dataset.note,{note:inp.value}));
+  document.querySelectorAll('[data-deadline]').forEach(inp=>inp.onchange=()=>setTask(inp.dataset.deadline,{deadline:inp.value}));
+  document.querySelectorAll('[data-doc-exp]').forEach(inp=>inp.onchange=()=>{ const dt=inp.dataset.docExp; state.docs[dt]=Object.assign(state.docs[dt]||{},{expiry:inp.value}); persist(); render(); });
+  document.querySelectorAll('[data-doc-note]').forEach(inp=>inp.onchange=()=>{ const dt=inp.dataset.docNote; state.docs[dt]=Object.assign(state.docs[dt]||{},{note:inp.value}); persist(); });
+  document.querySelectorAll('[data-habit]').forEach(cb=>cb.onchange=()=>{ state['habit_'+cb.dataset.habit]=cb.checked; persist(); });
+  document.querySelectorAll('[data-emerg]').forEach(inp=>inp.onchange=()=>{ state.emergOverrides=state.emergOverrides||{}; state.emergOverrides[inp.dataset.emerg]=inp.value; persist(); });
+  const gn = document.getElementById('guide-notes'); if(gn) gn.onchange=()=>{ state.guideNotes=gn.value; persist(); };
+  const ja = document.getElementById('journal-add');
+  if(ja) ja.onclick=()=>{
+    const t = document.getElementById('journal-entry');
+    if(t.value.trim()){ state.journal = state.journal||[]; state.journal.push({date:new Date().toLocaleDateString(),text:t.value.trim()}); persist(); render(); }
+  };
+}
+
+render();
+</script>
+</body>
+</html>
